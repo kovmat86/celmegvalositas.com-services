@@ -1,0 +1,58 @@
+{
+  "name": "services.webellionlimited.com",
+  "version": "1.0.0",
+  "description": "Global unopinionated router for individual services hosted at services.webellionlimited.com",
+  "main": "index.js",
+  "scripts": {
+    "build": "rimraf build/ && webpack",
+    "format": "prettier-eslint --write src/**/*.js",
+    "lint": "eslint src/**/*.js",
+    "precommit": "lint-staged",
+    "start": "forever start ./build/main.js",
+    "stop": "forever stop ./build/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vbence86/services.webellionlimited.com.git"
+  },
+  "keywords": [
+    "Router",
+    "Express",
+    "RESTful",
+    "API"
+  ],
+  "author": "Bence Varga <vbence86@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vbence86/services.webellionlimited.com/issues"
+  },
+  "homepage": "https://github.com/vbence86/services.webellionlimited.com#readme",
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "forever": "^0.15.3",
+    "fs": "^0.0.1-security",
+    "json-loader": "^0.5.7",
+    "nodemailer": "^4.1.3",
+    "path": "^0.12.7",
+    "webpack": "^3.6.0"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier-eslint --write src/**/*.js",
+      "git add"
+    ]
+  },
+  "devDependencies": {
+    "eslint": "^4.8.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.2.3",
+    "prettier-eslint": "^8.2.0",
+    "prettier-eslint-cli": "^4.4.0",
+    "rimraf": "^2.6.2"
+  }
+}
