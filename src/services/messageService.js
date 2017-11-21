@@ -1,4 +1,4 @@
-import { sendEmail } from "./helpers.js";
+import { sendEmail } from "../helpers.js";
 
 function renderEmailBody(data) {
   const now = new Date().toString();

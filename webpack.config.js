@@ -1,3 +1,4 @@
+const webpack = require("webpack");
 const path = require("path");
 const fs = require("fs");
 
@@ -63,6 +64,7 @@ config.plugins = [
   new webpack.DefinePlugin({
     "process.env": {
       SMTP_PROTOCOL: JSON.stringify(process.env.SMTP_PROTOCOL),
+      SMTP_PORT: JSON.stringify(process.env.SMTP_PORT),
       SMTP_HOST: JSON.stringify(process.env.SMTP_HOST),
       SMTP_ACCOUNT: JSON.stringify(process.env.SMTP_ACCOUNT),
       SMTP_PASSWORD: JSON.stringify(process.env.SMTP_PASSWORD)

@@ -1,6 +1,9 @@
 import nodemailer from "nodemailer";
 
 const SMTP_CONFIG = {
+  port: process.env.SMTP_PORT,
+  protocol: process.env.SMTP_PROTOCOL,
+  host: process.env.SMTP_HOST,
   account: process.env.SMTP_ACCOUNT,
   password: process.env.SMTP_PASSWORD
 };
@@ -37,11 +40,13 @@ function installer(app) {
 }
 
 function sendEmail(to, subject, html) {
-  const host = SMTP_CONFIG.HOST;
+  const host = SMTP_CONFIG.host;
+  const port = SMTP_CONFIG.port;
+  const protocol = SMTP_CONFIG.protocol;
   const account = SMTP_CONFIG.account;
   const password = SMTP_CONFIG.password;
   const transporter = nodemailer.createTransport(
-    `smtps://${account}:${password}@${host}`
+    `${protocol}://${account}:${password}@${host}:${port}`
   );
   const mailOptions = {
     from: '"Célmegvalósítás mellébeszélés nélkül" <info@celmegvalositas.com>',
