@@ -1,0 +1,33 @@
+import { sendEmail } from "../helpers.js";
+
+function renderEmailBody(data) {
+  const now = new Date().toString();
+  return `<div><p>${data.name} visszahívást kért ${now}-kor</p>
+  <p><b>Név: </b>${data.name}</p>
+  <p><b>Email: </b><b>${data.email}</p>
+  <p><b>Telefon: </b><b>${data.phone}</p>
+  <p><b>Visszahívas kért idõpontja: </b>${data.time}</p>
+  `;
+}
+
+const Service = {
+  urlPattern: "/request/phoneback",
+  type: "post",
+  run: (req, res) => {
+    const data = req.body;
+    const html = renderEmailBody(data);
+    const to = "info@celmegvalositas.com";
+    const subject = `${data.name} visszahívást kér`;
+
+    sendEmail(to, subject, html)
+      .then(() => {
+        res.json({ status: "OK" });
+      })
+      .catch(err => {
+        res.status(500).json(err);
+      });
+  }
+};
+
+export { Service };
+export default Service;
