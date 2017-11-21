@@ -1,3 +1,10 @@
+import nodemailer from "nodemailer";
+
+const SMTP_CONFIG = {
+  account: process.env.SMTP_ACCOUNT,
+  password: process.env.SMTP_PASSWORD
+};
+
 function cors(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -29,5 +36,29 @@ function installer(app) {
   };
 }
 
-export { cors, installer, validate };
+function sendEmail(to, subject, html) {
+  const host = SMTP_CONFIG.HOST;
+  const account = SMTP_CONFIG.account;
+  const password = SMTP_CONFIG.password;
+  const transporter = nodemailer.createTransport(
+    `smtps://${account}:${password}@${host}`
+  );
+  const mailOptions = {
+    from: '"Célmegvalósítás mellébeszélés nélkül" <info@celmegvalositas.com>',
+    to,
+    subject,
+    html
+  };
+
+  return new Promise((resolve, reject) => {
+    transporter.sendMail(mailOptions, function(error, info) {
+      if (error) {
+        reject(error);
+      }
+      resolve();
+    });
+  });
+}
+
+export { cors, installer, validate, sendEmail };
 export default installer;
