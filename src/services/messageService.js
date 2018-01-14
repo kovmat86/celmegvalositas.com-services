@@ -20,11 +20,14 @@ const Service = {
     const to = "info@celmegvalositas.com";
     const subject = `${data.name} üzenetet küldött`;
 
-    sendEmail(to, subject, html)
+    console.log("Sending message...");
+
+    return sendEmail(to, subject, html)
       .then(() => {
-        res.json({ status: "OK" });
+        res.json({ status: 200 });
       })
       .catch(err => {
+        console.log(err);
         res.status(500).json(err);
       });
   }

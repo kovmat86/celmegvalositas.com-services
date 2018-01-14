@@ -32,7 +32,7 @@ function installer(app) {
       );
     app[service.type || "get"](service.urlPattern, (req, res) => {
       Promise.resolve()
-        .then(() => service.run({ req, res }))
+        .then(() => service.run(req, res))
         .then(response => res.json(response || { status: 200 }))
         .catch(err => res.status(500).json(err));
     });
@@ -43,8 +43,8 @@ function sendEmail(to, subject, html) {
   const host = SMTP_CONFIG.host;
   const port = SMTP_CONFIG.port;
   const protocol = SMTP_CONFIG.protocol;
-  const account = SMTP_CONFIG.account;
-  const password = SMTP_CONFIG.password;
+  const account = encodeURIComponent(SMTP_CONFIG.account);
+  const password = encodeURIComponent(SMTP_CONFIG.password);
   const transporter = nodemailer.createTransport(
     `${protocol}://${account}:${password}@${host}:${port}`
   );
@@ -54,6 +54,13 @@ function sendEmail(to, subject, html) {
     subject,
     html
   };
+
+  console.log(
+    mailOptions.from,
+    to,
+    subject,
+    `${protocol}://${account}:${password}@${host}:${port}`
+  );
 
   return new Promise((resolve, reject) => {
     transporter.sendMail(mailOptions, function(error, info) {
