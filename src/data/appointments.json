@@ -1,0 +1,10 @@
+{
+	"appointments": {
+		"20180225": [
+			{
+				"available": true,
+				"taken": false
+			}
+		]
+	}
+}
