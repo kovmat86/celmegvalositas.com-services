@@ -34,7 +34,10 @@ function installer(app) {
       Promise.resolve()
         .then(() => service.run(req, res))
         .then(response => res.json(response || { status: 200 }))
-        .catch(err => res.status(500).json(err));
+        .catch(err => {
+          console.log(err);
+          res.status(500).json(err);
+        });
     });
   };
 }
