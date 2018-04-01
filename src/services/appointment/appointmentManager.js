@@ -12,7 +12,6 @@ function save(appointments) {
       console.log("error generated: " + JSON.stringify(err));
       throw err;
     }
-    console.log("Appointments saved: " + fileName);
   });
 }
 

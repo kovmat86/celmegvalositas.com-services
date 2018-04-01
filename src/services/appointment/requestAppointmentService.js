@@ -1,5 +1,6 @@
 import { sendEmail } from "../../helpers.js";
 import { reserveSlot } from "./appointmentManager.js";
+import moment from "moment";
 
 function renderInfoEmailBody(data) {
   const now = new Date().toString();
@@ -12,12 +13,13 @@ function renderInfoEmailBody(data) {
 }
 
 function renderConfirmationEmailBody(data) {
+  const formattedDate = moment(data.date).format("YYYY. MM. DD.");
   return `
     <p>Kedves ${data.name}!</p>
 
     <p>Köszönjük a jelentkezésed!</p>
 
-    <p>Választott időpont: ${data.time} ${data.slot}</p>
+    <p>Választott időpont: ${formattedDate} ${data.slot}</p>
 
     <p>
       Hogyan kell készülni:
@@ -60,8 +62,9 @@ const Service = {
     console.log('request/appointment called');
     console.log(data);
     reserveSlot(data.date, data.slot);
-    // sendInfoEmail(data),
-    // sendConfirmationEmail(data)
+    sendInfoEmail(data),
+    sendConfirmationEmail(data)
+    // console.log(renderConfirmationEmailBody(data));
   }
 };
 
