@@ -56,13 +56,8 @@ const Service = {
   type: "post",
   run: (req, res) => {
     const data = req.body;
-    Promise.all([sendInfoEmail(data), sendConfirmationEmail(data)])
-      .then(() => {
-        res.json({ status: "OK" });
-      })
-      .catch(err => {
-        res.status(500).json(err);
-      });
+    sendInfoEmail(data);
+    sendConfirmationEmail(data);
   }
 };
 

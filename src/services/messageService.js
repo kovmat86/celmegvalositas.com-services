@@ -19,17 +19,8 @@ const Service = {
     const html = renderEmailBody(data);
     const to = "info@celmegvalositas.com";
     const subject = `${data.name} üzenetet küldött`;
-
     console.log("Sending message...");
-
-    return sendEmail(to, subject, html)
-      .then(() => {
-        res.json({ status: 200 });
-      })
-      .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-      });
+    sendEmail(to, subject, html);
   }
 };
 

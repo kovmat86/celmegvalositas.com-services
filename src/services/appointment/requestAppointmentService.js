@@ -62,9 +62,8 @@ const Service = {
     console.log('request/appointment called');
     console.log(data);
     reserveSlot(data.date, data.slot);
-    sendInfoEmail(data),
-    sendConfirmationEmail(data)
-    // console.log(renderConfirmationEmailBody(data));
+    sendInfoEmail(data);
+    sendConfirmationEmail(data);
   }
 };
 

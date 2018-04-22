@@ -18,8 +18,6 @@ app.use(cors);
 app.use(bodyParser.json());
 app.use(validate);
 
-// app.options('/', (req, res) => res.send('OK OPTIONS'));
-
 // Installs all the services
 const services = [
   messageService,

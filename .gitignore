@@ -61,3 +61,4 @@ typings/
 build
 restart.sh
 restart.sh
+src/data/appointments.json
